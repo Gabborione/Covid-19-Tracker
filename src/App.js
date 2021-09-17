@@ -63,12 +63,16 @@ function App() {
         setCountryInfo(data);
         setCountry(countryCode);
 
-        console.log(data.countryInfo);
-
-        countryCode === "worldwide"
-          ? setMapCenter([34.80746, -40.4796])
-          : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        setMapZoom(4);
+        if (
+          countryCode === "worldwide" ||
+          data.countryInfo.lat == null ||
+          data.countryInfo.long == null
+        ) {
+          setMapCenter([34.80746, -40.4796]);
+        } else {
+          setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+          setMapZoom(5);
+        }
 
         console.log(mapCenter);
       });
@@ -92,7 +96,6 @@ function App() {
             </Select>
           </FormControl>
         </div>
-
         <div className="app__stats">
           <InfoBox
             title="Coronavirus Cases"
@@ -112,7 +115,6 @@ function App() {
             total={countryInfo.deaths}
           />
         </div>
-
         <Map center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
