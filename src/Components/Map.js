@@ -1,11 +1,18 @@
 import React from "react";
+import { MapContainer as LeafletMap, TileLayer } from "react-leaflet";
+import "../Styles/Map.css";
 
-const Map = () => {
+function Map({ center, zoom }) {
   return (
     <div className="map">
-      <h1>i am a map</h1>
+      <LeafletMap center={center} zoom={zoom}>
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+      </LeafletMap>
     </div>
   );
-};
+}
 
 export default Map;
